@@ -22,21 +22,29 @@ const [articles, setArticles] = useState([]);
         .catch(err => console.log('error posting from front end', err));
     }
 
+    const goToArticle = (articleUrl) => {
+      const newWindow = window.open(articleUrl, '_blank', 'noopener, noreferrer')
+      if (newWindow) newWindow.opener = null
+    }
   useEffect(getArticles, []);
 
   return (
     <Layout>
-      <h1>Normie Feed</h1>
+      <h1 className='text-7xl w-50 text-center mt-20'>Normie News</h1>
+      <p className='text-center mb-20'><sub><em>This is where you'll find today's trending headlines in the US. </em><br/> Press the plus button to save article for later </sub></p>
       {articles.length ? (
-        <div>
+        <div className='mx-44 text-center divide-y'>
           {articles.map((article, index) => (
-            <div>
-              <h1>{article.title}</h1>
-              {article.author ? (<p className=""><em>By: {article.author}</em></p>) : null}
-              <img alt={article.description} src={article.urlToImage} className="h-96"/>
-              <p>{article.description}</p>
-              <button type="button" onClick={() => saveForLater(article)}>read later</button>
-            </div>
+            <section key={article.title} className='flex flex-col '>
+              <h1 className='text-3xl mt-10 text-center align-center' onClick={() => goToArticle(article.url)}>{article.title}</h1>
+              {article.author ? (<p className="text-center mb-5"><em><sub>By: {article.author}</sub></em></p>) : null}
+              <div className='flex justify-center'>
+                <button className='text-7xl mt-0 mr-10 place-self-start active:text-white active:-translate-y-px' type="button" onClick={() => saveForLater(article)}>+</button>
+               <img onClick={() => goToArticle(article.url)} alt={article.description} src={article.urlToImage} className="max-w-[85%] self-center "/>
+              </div>
+              <p className="text-center my-5 text-lg font-['Times New Roman']" onClick={() => goToArticle(article.url)}>{article.description}</p>
+
+            </section>
           ))}
         </div>
       ) : null}

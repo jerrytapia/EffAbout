@@ -21,3 +21,11 @@ exports.getSavedNews = (req, res) => {
     .then((results) => res.status(200).send(results))
     .catch(err => console.log('error retrieving saved articles', err));
 }
+
+exports.removeLater = (req, res) => {
+  let { articleUrl } = req.body;
+  console.log(articleUrl);
+  SavedArticles.deleteOne({url: articleUrl})
+    .then(() => res.status(201).send({'status': 'ok'}))
+    .catch(err => console.log('error deleting in controller', err));
+}

@@ -8,6 +8,9 @@ module.exports = {
         primary: '#003D7A'
       }
     },
+    maxWidth: {
+      '3/4': '75%'
+    },
   },
   plugins: [],
 }
