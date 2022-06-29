@@ -44,6 +44,54 @@ app.get('/sources', (req, res) => {
     });
 })
 
+const centristOutlets=['the-wall-street-journal', 'bbc-news', 'reuters', 'associated-press', 'axios', 'usa-today', 'the-hill'];
+
+const liberalOutlets = ['the-huffington-post', 'the-lad-bible', 'abc-news', 'cnn', 'msnbc', 'nbc-news', 'politico', 'time', 'the-washington-post', 'buzzfeed', 'newsweek', 'cbs-news'];
+
+const conservativeOutlets = ['national-review', 'the-american-conservative', 'fox-news', 'the-washington-times'];
+
+//CENTRIST
+app.get('/centrists', (req, res) => {
+  axios.get(`http://newsapi.org/v2/top-headlines?sources=${centristOutlets.join()}`, {
+    headers: {
+      'Authorization': process.env.TOKEN
+    }
+  })
+    .then((results) => res.status(200).send(results.data))
+    .catch((err) => {
+      console.log('error getting top sources from API', err);
+      res.status(500).send(err);
+    });
+})
+
+//LEFTIES
+app.get('/lefties', (req, res) => {
+  axios.get(`http://newsapi.org/v2/top-headlines?sources=${liberalOutlets.join()}`, {
+    headers: {
+      'Authorization': process.env.TOKEN
+    }
+  })
+    .then((results) => res.status(200).send(results.data))
+    .catch((err) => {
+      console.log('error getting top sources from API', err);
+      res.status(500).send(err);
+    });
+})
+
+//RIGHTIES
+app.get('/righties', (req, res) => {
+  axios.get(`http://newsapi.org/v2/top-headlines?sources=${conservativeOutlets.join()}`, {
+    headers: {
+      'Authorization': process.env.TOKEN
+    }
+  })
+    .then((results) => res.status(200).send(results.data))
+    .catch((err) => {
+      console.log('error getting top sources from API', err);
+      res.status(500).send(err);
+    });
+})
+
 app.get('/normienews', controllers.getNormalNews);
 
 app.get('/later', controllers.getSavedNews);
