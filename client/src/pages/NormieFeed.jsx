@@ -38,7 +38,7 @@ const [articles, setArticles] = useState([]);
             <section key={article.title} className='flex flex-col '>
               <h1 className='text-3xl mt-10 text-center align-center' onClick={() => goToArticle(article.url)}>{article.title}</h1>
               {article.author ? (<p className="text-center mb-5"><em><sub>By: {article.author}</sub></em></p>) : null}
-              <div className='flex justify-center'>
+              <div className='flex justify-center my-5'>
                 <button className='text-7xl mt-0 mr-10 place-self-start active:text-white active:-translate-y-px' type="button" onClick={() => saveForLater(article)}>+</button>
                <img onClick={() => goToArticle(article.url)} alt={article.description} src={article.urlToImage} className="max-w-[85%] self-center "/>
               </div>

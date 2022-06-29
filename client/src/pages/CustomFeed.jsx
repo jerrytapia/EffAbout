@@ -56,7 +56,7 @@ function CustomFeed() {
   return (
     <Layout>
        <h1 className='text-7xl w-50 text-center mt-20'>Tailored News</h1>
-      <p className='text-center mb-20'><sub><em>Never hear from the other side again! </em><br/> Slide to adjust your political stance </sub></p>
+      <p className='text-center mb-20'><sub><em>Never hear from the other side again! </em><br/> Slide to adjust your echo chamber <sup>TM</sup> </sub></p>
         <div >
           <ReactSlider
             step={1}

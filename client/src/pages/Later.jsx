@@ -22,6 +22,10 @@ function Later() {
 
     useEffect(getSavedArticles, []);
 
+    const goToArticle = (articleUrl) => {
+      const newWindow = window.open(articleUrl, '_blank', 'noopener, noreferrer')
+      if (newWindow) newWindow.opener = null
+    }
   return (
     <Layout>
       <h1 className='text-7xl w-50 text-center mt-20'>Saved For Later</h1>
@@ -33,7 +37,9 @@ function Later() {
               <h1 className='text-3xl mt-10 text-center align-center'>{article.title}</h1>
               {article.author ? (<p className="text-center mb-5"><em><sub>By: {article.author}</sub></em></p>) : null}
               <div className='flex justify-center'>
-               <img alt={article.description} src={article.urlToImage} className="w-7/12 max-w-[85%] self-center "/>
+               <img
+               onClick={() => goToArticle(article.url)}
+               alt={article.description} src={article.urlToImage} className="w-7/12 max-w-[85%] self-center "/>
                <button className='text-3xl mt-0 ml-10 place-self-start active:text-red active:-translate-y-px' type="button" onClick={() => deleteArticle(article.url)}>X</button>
               </div>
               <p className='text-center my-5'>{article.description}</p>
